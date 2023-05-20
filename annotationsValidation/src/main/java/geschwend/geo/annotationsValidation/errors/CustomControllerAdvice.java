@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * Using this class mostly for repackaging the messages from the exceptions, and also to get a standardized format for
  * error and exception responses.
+ *
+ * The <code>@ControllerAdvice</code> annotation is used to define global exception handling and data binding rules for
+ * all the controllers in your application. It allows you to consolidate your exception handling and apply it
+ * consistently across multiple controllers (ergo a uniformed format for all the exceptions).
  */
 @ControllerAdvice
 public class CustomControllerAdvice {

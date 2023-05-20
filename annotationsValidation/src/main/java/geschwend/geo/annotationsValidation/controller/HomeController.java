@@ -2,14 +2,12 @@ package geschwend.geo.annotationsValidation.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import geschwend.geo.annotationsValidation.DTO.HomeDTO;
+import geschwend.geo.annotationsValidation.DTO.responses.HomeDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import geschwend.geo.annotationsValidation.DTO.requests.ValidateDataRequest;
 import geschwend.geo.annotationsValidation.DTO.requests.ValidateDataRequestWrapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,23 +25,24 @@ public class HomeController {
 
     private static final Logger log = LogManager.getLogger(HomeController.class);
 
-    public HomeController() {
-        log.info("HomeController created!");
+    /**
+     * Simple controller method to demonstrate the validation annotations. Mostly concerned with whether the parameters
+     * exist in the body of the incoming request.
+     */
+    @PostMapping(path = "/home", produces = "application/json")
+    public ResponseEntity<String> home(@Valid @RequestBody ValidateDataRequestWrapper validateDataRequestWrapper) throws JsonProcessingException {
 
-    }
-    @PostMapping(path="/home",  produces="application/json")
-    public ResponseEntity<String> home(@Valid @RequestBody ValidateDataRequest validateDataRequest) throws JsonProcessingException {
-        log.info("HomeController called! Testing validation annotations.");
+        log.info("HomeController called! Testing validation annotations: Request message must be valid.");
 
+        String validated = createResponse();
 
-        String greeting = createResponse();
-        //after ObjectMapper.
-        log.info("SENT MESSAGE:\n\n{}",greeting);
-        return  new ResponseEntity<>(greeting, HttpStatus.OK);
+        log.info("SENT MESSAGE:\n\n{}", validated);
+        return new ResponseEntity<>(validated, HttpStatus.OK);
     }
 
     /**
-     * Creates a response for the home page.
+     * Creates a pretty response for the home controller; mostly for logging purposes.
+     *
      * @return A successful response with a value of true else returns an exception
      * @throws JsonProcessingException Indicates an error during the processing or parsing of JSON data.
      */

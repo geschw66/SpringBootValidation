@@ -3,10 +3,11 @@ package geschwend.geo.annotationsValidation.DTO.requests;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.springframework.format.annotation.NumberFormat;
 
 
 /**
@@ -22,6 +23,7 @@ public class ValidateDataRequest {
     @JsonProperty("id")
     @Valid
     @NotBlank(message = "parameter 'id' is mandatory")
+    @Pattern(regexp = "^\\d+$", message = "parameter 'id' uses only numeric characters.")
     private String id;
 
     @JsonProperty("firstName")
