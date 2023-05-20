@@ -1,0 +1,15 @@
+spring:
+
+  # datasource configure the DATABASE CONNECTION properties used by the application to connect to the database.
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl  # Local database using thin driver on port 1521. orcl is the unique system identifier.
+    username: C##BARNEY                   # C## prefix is  the best practice to denote a common user, and this is a read only user.
+    password: rubble                      # Password should be encrypted probably but ok.
+    driver-class-name: oracle.jdbc.OracleDriver # The fully-qualified class name of the JDBC driver.
+
+    # jpa parameters configure the BEHAVIORS SPECIFIC to the Java Persistence API (JPA) provider that is used in the application.
+    jpa:
+      database: ORACLE # Specify the type of database that your application will be connecting to (oracle, mysql, postgres)
+      show-sql: true   # Want to see the sql in the local "run" window. prints it out.
+      hibernate:
+        ddl-auto: none # Turn off any JPA ddl shenanigans with the database.
