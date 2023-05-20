@@ -10,6 +10,8 @@ import java.util.Date;
  * @author George C. Geschwend
  * @date 5/20/2023 4:08 PM
  * @project SpringBootValidation
+ *
+ * This class is used to create a uniform error response message in JSON.
  */
 @Getter
 @Setter

@@ -14,6 +14,8 @@ import org.springframework.format.annotation.NumberFormat;
  * @author George C. Geschwend
  * @date 5/20/2023 2:22 PM
  * @project SpringBootValidation
+ *
+ * This POJO is used to hold the incoming message parameters; the data block.
  */
 @Data
 @NoArgsConstructor
