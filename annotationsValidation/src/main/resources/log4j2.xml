@@ -2,31 +2,34 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">
-            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+          %yellow{%d{yyyy-MM-dd HH:mm:ss.SSS}} %green{%5p} ${hostName} --- [%15.15t] %-40.40c{1.} : %green{%m%n}%ex
         </Property>
     </Properties>
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
+
+        <RollingFile name="FileAppender" fileName="logs/log4j2-annotationsValidation.log"
+                     filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern> %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="geschwend.geo.annotationsValidation" level="info" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
         </Logger>
 
         <Root level="info">
             <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
         </Root>
     </Loggers>
-    <RollingFile name="FileAppender" fileName="logs/log4j2-annotationsValidation.log"
-                 filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
-        <PatternLayout>
-            <Pattern>${LOG_PATTERN}</Pattern>
-        </PatternLayout>
-        <Policies>
-            <SizeBasedTriggeringPolicy size="10MB" />
-        </Policies>
-        <DefaultRolloverStrategy max="10"/>
-    </RollingFile>
 </Configuration>
